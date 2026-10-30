@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rw.auca.vote_safe.models.ReturningOfficer;
@@ -37,6 +38,10 @@ public class ReturningOfficerController {
         if (r.isPresent()) {
             return new ResponseEntity<>(r.get(),HttpStatus.OK);
         }return new ResponseEntity<>("The returning officer with that id does not exist",HttpStatus.NOT_FOUND);
+    }
+    @GetMapping("/by-position")
+    public ResponseEntity<List<ReturningOfficer>>byPosition(@RequestParam String name){
+        return ResponseEntity.ok(returningOfficerServices.findByPosition(name));
     }
     @PutMapping ("/update/{id}")
     public ResponseEntity<String>update(@PathVariable UUID id ,@RequestBody ReturningOfficer r){

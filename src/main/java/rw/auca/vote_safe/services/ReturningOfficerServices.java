@@ -21,6 +21,9 @@ public class ReturningOfficerServices {
     public Optional<ReturningOfficer>byId(UUID id){
         return returningOfficerRepository.findById(id);
     }
+    public List<ReturningOfficer>findByPosition(String name){
+        return returningOfficerRepository.findOfficersByPositionName(name);
+    }
     public String updateReturningOfficer(UUID id,ReturningOfficer returningOfficer){
         if(returningOfficerRepository.existsById(id)){
             returningOfficer.setId(id);

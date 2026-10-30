@@ -22,6 +22,9 @@ public class PositionServices{
    public Optional<Position>byId(UUID id){
     return positionRepository.findById(id);
    }
+   public List<Position>findUnused(){
+    return positionRepository.findUnusedPositions();
+   }
    public String updatePosition(UUID id,Position p){
     if(positionRepository.existsById(id)){
       p.setId(id);

@@ -38,6 +38,10 @@ public class PositionController {
            return new ResponseEntity<>(position.get(),HttpStatus.OK);
         }return new ResponseEntity<>("The position with that id does not exist",HttpStatus.NOT_FOUND);
     }
+    @GetMapping("/unused")
+    public  ResponseEntity<List<Position>>unusedPositions(){
+        return ResponseEntity.ok(positionServices.findUnused());
+    }
     @PutMapping("/update/{id}")
     public ResponseEntity<String>update(@PathVariable UUID id,@RequestBody Position p){
         String msg=positionServices.updatePosition(id, p);

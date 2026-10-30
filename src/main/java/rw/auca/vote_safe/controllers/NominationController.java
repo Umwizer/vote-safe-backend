@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rw.auca.vote_safe.models.Nomination;
+import rw.auca.vote_safe.models.NominationStatus;
 import rw.auca.vote_safe.services.NominationServices;
 import java.util.*;
 @RestController 
@@ -35,6 +37,10 @@ public class NominationController{
     if (nomination.isPresent()) {
         return new ResponseEntity<>(nomination.get(),HttpStatus.OK);
     }return new ResponseEntity<>("The nomination with that id does not exist",HttpStatus.NOT_FOUND);
+  }
+  @GetMapping("/by-status")
+  public ResponseEntity<List<Nomination>>byStatus(@RequestParam NominationStatus status){
+    return ResponseEntity.ok(nominationServices.findByStatus(status));
   }
   @PutMapping("/update/{id}")
   public ResponseEntity<String>update(@PathVariable  UUID id, @RequestBody  Nomination n){

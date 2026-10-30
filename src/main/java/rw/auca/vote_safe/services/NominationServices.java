@@ -2,6 +2,7 @@ package rw.auca.vote_safe.services;
 
 import org.springframework.stereotype.Service;
 import rw.auca.vote_safe.models.Nomination;
+import rw.auca.vote_safe.models.NominationStatus;
 import rw.auca.vote_safe.repository.NominationRepository;
 import java.util.*;
 @Service 
@@ -20,6 +21,9 @@ public class NominationServices {
     }
     public Optional<Nomination>byId(UUID id){
         return nominationRepository.findById(id);
+    }
+    public List<Nomination>findByStatus(NominationStatus status){
+        return nominationRepository.findByStatusOrderByNominationDateAsc(status);
     }
     public String updateNomination(UUID id, Nomination nomination){
         if (nominationRepository.existsById(id)) {

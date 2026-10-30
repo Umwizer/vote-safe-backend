@@ -19,6 +19,9 @@ public class CandidateServices {
     public List<Candidate>all(){
         return candidateRepository.findAll();
     }
+    public List<Candidate>findByLastName(String lastName){
+        return candidateRepository.findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
+    }
     public  Optional<Candidate>byId(UUID id){
         return candidateRepository.findById(id);
     }

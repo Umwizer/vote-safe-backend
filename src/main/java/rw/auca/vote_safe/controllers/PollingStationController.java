@@ -14,7 +14,7 @@ import rw.auca.vote_safe.models.PollingStation;
 import rw.auca.vote_safe.services.PollingStationServices;
 import java.util.*;
 @RestController 
-@RequestMapping("api/polling-nominations")
+@RequestMapping("api/polling-stations")
 public class PollingStationController{
     private final PollingStationServices pollingStationServices;
     

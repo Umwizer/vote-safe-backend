@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 import rw.auca.vote_safe.models.Candidate;
@@ -36,6 +37,10 @@ public class CandidateController {
         if (candidate.isPresent()) {
             return new ResponseEntity<>(candidate.get(),HttpStatus.OK);
         }return new ResponseEntity<>("The candidate with that id does not exist",HttpStatus.NOT_FOUND);
+    }
+    @GetMapping("/by-last-name")
+    public ResponseEntity<List<Candidate>>byLastName(@RequestParam String lastName){
+        return ResponseEntity.ok(candidateServices.findByLastName(lastName));
     }
     @PutMapping("/update/{id}")
     public ResponseEntity<String>update(@PathVariable UUID id,@RequestBody Candidate c){

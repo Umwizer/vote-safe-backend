@@ -14,6 +14,14 @@ public class NominationServices {
         this.nominationRepository = nominationRepository;
     }
     public String saveNomination(Nomination nomination){
+        if (nomination.getNominationDate().isBefore(LocalDate.now())) {
+            return  "Nomination date cannot be in the past";  
+        }
+        boolean exists = nominationRepository.existsByReturningOfficerIdAndNominationDateAndStatusNot(nomination.getReturningOfficer().getId(),nomination.getNominationDate(),NominationStatus.DISQUALIFIED);
+        if (exists) {
+            return "Returning officer already vets a nomination on that date";
+        }
+        nomination.setStatus(NominationStatus.SUBMITTED);
         nominationRepository.save(nomination);
         return "Nomination saved successfully";
     }

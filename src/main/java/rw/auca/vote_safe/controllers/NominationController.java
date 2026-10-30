@@ -1,6 +1,6 @@
 package rw.auca.vote_safe.controllers;
 
-import org.springframework.cglib.core.Local;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,7 +27,13 @@ public class NominationController{
   }
   @PostMapping("/save")
   public ResponseEntity<String>save(@RequestBody Nomination n){
-    return new ResponseEntity<>(nominationServices.saveNomination(n),HttpStatus.CREATED);
+    String msg = nominationServices.saveNomination(n);
+    if (msg.equals("Nomination date cannot be in the past")) {
+        return new ResponseEntity<>(msg,HttpStatus.BAD_REQUEST);
+    }if (msg.equals("Returning officer already vets a nomination on that date")) {
+        return new ResponseEntity<>(msg,HttpStatus.CONFLICT);
+    }
+    return new ResponseEntity<>(msg,HttpStatus.CREATED);
   }
   @GetMapping("/all")
   public ResponseEntity<List<Nomination>>all(){

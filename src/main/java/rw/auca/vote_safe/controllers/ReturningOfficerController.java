@@ -50,6 +50,17 @@ public class ReturningOfficerController {
             return new ResponseEntity<>(msg,HttpStatus.NOT_FOUND);
         }return ResponseEntity.ok(msg);
     }
+    @PutMapping("/{returningOfficerId}/positions/{positionId}")
+    public ResponseEntity<String>addPosition(@PathVariable UUID returningOfficerId,@PathVariable UUID positionId){
+        String msg = returningOfficerServices.addPosition(returningOfficerId, positionId);
+        if (msg.equals("The returning officer with that id does not exist") || msg.equals("That position does not exist ")) {
+            return new ResponseEntity<>(msg,HttpStatus.NOT_FOUND);
+        }
+        if (msg.equals("The returning officer already has that position")) {
+            return new ResponseEntity<>(msg,HttpStatus.CONFLICT);
+        }
+        return ResponseEntity.ok(msg);
+    }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String>delete(@PathVariable UUID id){
         String msg = returningOfficerServices.delete(id);

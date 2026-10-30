@@ -2,18 +2,45 @@ package rw.auca.vote_safe.services;
 
 import org.springframework.stereotype.Service;
 import rw.auca.vote_safe.models.ReturningOfficer;
+import rw.auca.vote_safe.repository.PositionRepository;
 import rw.auca.vote_safe.repository.ReturningOfficerRepository;
+import rw.auca.vote_safe.models.Position;
 import java.util.*;
 @Service 
 public class ReturningOfficerServices {
     private final ReturningOfficerRepository returningOfficerRepository;
-
-    public ReturningOfficerServices(ReturningOfficerRepository returningOfficerRepository) {
+    private final PositionRepository positionRepository; 
+    public ReturningOfficerServices(ReturningOfficerRepository returningOfficerRepository,PositionRepository positionRepository) {
         this.returningOfficerRepository = returningOfficerRepository;
+        this.positionRepository = positionRepository;
     }
-    public String saveReturningOfficer(ReturningOfficer returningOfficer){
-        returningOfficerRepository.save(returningOfficer);
-        return "Returning officer added successfully";
+    public String saveReturningOfficer(ReturningOfficer r){
+        returningOfficerRepository.save(r);
+        return "ReturningOfficer saved successfully";
+    }
+    public String addPosition(UUID officerId,UUID positionId){
+        Optional<ReturningOfficer> existingOfficer = returningOfficerRepository.findById(officerId);
+        if (existingOfficer.isEmpty()) {
+            return  "The returning  officer with that id does not exist";
+        }
+        Optional<Position> existingPosition = positionRepository.findById(positionId);
+        if (existingPosition.isEmpty()) {
+           return "That position does not exist";
+        }
+        ReturningOfficer officer = existingOfficer.get();
+        Position position = existingPosition.get();
+        boolean alreadyHasIt = false;
+        for(Position currentPosition : officer.getPositions()){
+            if (currentPosition.getId().equals(positionId)) {
+                alreadyHasIt = true;
+                break;
+            }
+        }if (alreadyHasIt) {
+            return  "The returning officer already has that position";
+        }
+        officer.getPositions().add(position);
+        returningOfficerRepository.save(officer);
+        return "Position added to the returning officer";
     }
     public List<ReturningOfficer>all(){
         return returningOfficerRepository.findAll();

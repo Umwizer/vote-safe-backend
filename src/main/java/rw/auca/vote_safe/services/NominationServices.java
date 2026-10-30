@@ -37,8 +37,28 @@ public class NominationServices {
     public List<Nomination>betweenDates(LocalDate start , LocalDate end){
         return nominationRepository.findByNominationDateBetweenOrderByNominationDateAsc(start, end);
     }
+    public String changeStatus(UUID id ,NominationStatus newStatus){
+        Optional<Nomination>found = nominationRepository.findById(id);
+        if (found.isEmpty()) {
+            return "The nomination with that id does not exist";
+        }Nomination n = found.get();
+        NominationStatus current = n.getStatus();
+        boolean allowed = false;
+        if (current == NominationStatus.SUBMITTED && (newStatus == NominationStatus.VETTED || newStatus == NominationStatus.DISQUALIFIED)) {
+            allowed=true;
+        }else if (current == NominationStatus.VETTED && (newStatus == NominationStatus.APPROVED || newStatus == NominationStatus.DISQUALIFIED)) {
+            allowed=true;
+        }if (!allowed) {
+            return "Cannot change status from"+current+"to"+newStatus;
+        }n.setStatus(newStatus);
+        nominationRepository.save(n);
+        return  "Nomination status updated successfully";
+    }
     public String updateNomination(UUID id, Nomination nomination){
-        if (nominationRepository.existsById(id)) {
+        Optional<Nomination>existingNomination =nominationRepository.findById(id);
+        if (existingNomination.isPresent()) {
+            Nomination found = existingNomination.get();
+            nomination.setStatus(found.getStatus());
             nomination.setId(id);
             nominationRepository.save(nomination);
             return "Nomination updated successfully";

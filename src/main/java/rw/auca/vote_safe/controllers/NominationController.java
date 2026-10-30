@@ -1,5 +1,6 @@
 package rw.auca.vote_safe.controllers;
 
+import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +17,7 @@ import rw.auca.vote_safe.models.Nomination;
 import rw.auca.vote_safe.models.NominationStatus;
 import rw.auca.vote_safe.services.NominationServices;
 import java.util.*;
+import java.time.LocalDate;
 @RestController 
 @RequestMapping ("api/nominations")
 public class NominationController{
@@ -41,6 +43,13 @@ public class NominationController{
   @GetMapping("/by-status")
   public ResponseEntity<List<Nomination>>byStatus(@RequestParam NominationStatus status){
     return ResponseEntity.ok(nominationServices.findByStatus(status));
+  }
+  @GetMapping("/between")
+  public ResponseEntity<List<Nomination>>between(@RequestParam String start , @RequestParam  String end){
+    LocalDate startDate = LocalDate.parse(start);
+    LocalDate endDate = LocalDate.parse(end);
+    return ResponseEntity.ok(nominationServices.betweenDates(startDate, endDate));
+
   }
   @PutMapping("/update/{id}")
   public ResponseEntity<String>update(@PathVariable  UUID id, @RequestBody  Nomination n){

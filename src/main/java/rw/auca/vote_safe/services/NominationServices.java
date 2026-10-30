@@ -5,6 +5,7 @@ import rw.auca.vote_safe.models.Nomination;
 import rw.auca.vote_safe.models.NominationStatus;
 import rw.auca.vote_safe.repository.NominationRepository;
 import java.util.*;
+import java.time.LocalDate;
 @Service 
 public class NominationServices {
     private final NominationRepository nominationRepository;
@@ -24,6 +25,9 @@ public class NominationServices {
     }
     public List<Nomination>findByStatus(NominationStatus status){
         return nominationRepository.findByStatusOrderByNominationDateAsc(status);
+    }
+    public List<Nomination>betweenDates(LocalDate start , LocalDate end){
+        return nominationRepository.findByNominationDateBetweenOrderByNominationDateAsc(start, end);
     }
     public String updateNomination(UUID id, Nomination nomination){
         if (nominationRepository.existsById(id)) {

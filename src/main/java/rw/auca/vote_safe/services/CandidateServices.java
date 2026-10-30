@@ -25,6 +25,9 @@ public class CandidateServices {
     public  Optional<Candidate>byId(UUID id){
         return candidateRepository.findById(id);
     }
+    public List<Candidate>findByOfficer(UUID id){
+        return candidateRepository.findCandidatesByReturningOfficer(id);
+    }
     public String updateCandidate(UUID id,Candidate candidate){
         if (candidateRepository.existsById(id)) {
             candidate.setId(id);

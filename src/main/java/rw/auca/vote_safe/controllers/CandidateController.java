@@ -14,14 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 import rw.auca.vote_safe.models.Candidate;
 import rw.auca.vote_safe.services.CandidateServices;
-
+import rw.auca.vote_safe.services.ReturningOfficerServices;
 @RestController
 @RequestMapping("api/candidates") 
 public class CandidateController {
     private final CandidateServices candidateServices;
-
-    private CandidateController(CandidateServices candidateServices){
+    private final  ReturningOfficerServices returningOfficerServices;
+    private CandidateController(CandidateServices candidateServices,ReturningOfficerServices returningOfficerServices){
         this.candidateServices = candidateServices;
+        this.returningOfficerServices=returningOfficerServices;
     }
     @PostMapping("/save")
     public ResponseEntity<String>save(@RequestBody  Candidate c){
@@ -41,6 +42,12 @@ public class CandidateController {
     @GetMapping("/by-last-name")
     public ResponseEntity<List<Candidate>>byLastName(@RequestParam String lastName){
         return ResponseEntity.ok(candidateServices.findByLastName(lastName));
+    }
+    @GetMapping("/of-returning-officer/{returningOfficerId}")
+    public ResponseEntity<?>byOfficer(@PathVariable UUID returningOfficerId){
+        if (!returningOfficerServices.byId(returningOfficerId).isPresent()) {
+            return new ResponseEntity<>("The returning officer with that id does not exist",HttpStatus.NOT_FOUND);
+        }return ResponseEntity.ok(candidateServices.findByOfficer(returningOfficerId));
     }
     @PutMapping("/update/{id}")
     public ResponseEntity<String>update(@PathVariable UUID id,@RequestBody Candidate c){

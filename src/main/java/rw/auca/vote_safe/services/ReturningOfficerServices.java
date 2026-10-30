@@ -11,7 +11,7 @@ public class ReturningOfficerServices {
     public ReturningOfficerServices(ReturningOfficerRepository returningOfficerRepository) {
         this.returningOfficerRepository = returningOfficerRepository;
     }
-    public String saveReturningOffaicer(ReturningOfficer returningOfficer){
+    public String saveReturningOfficer(ReturningOfficer returningOfficer){
         returningOfficerRepository.save(returningOfficer);
         return "Returning officer added successfully";
     }

@@ -2,17 +2,21 @@ package rw.auca.vote_safe.services;
 
 import org.springframework.stereotype.Service;
 import rw.auca.vote_safe.models.ReturningOfficer;
+import rw.auca.vote_safe.repository.PollingStationRepository;
 import rw.auca.vote_safe.repository.PositionRepository;
 import rw.auca.vote_safe.repository.ReturningOfficerRepository;
+import rw.auca.vote_safe.models.PollingStation;
 import rw.auca.vote_safe.models.Position;
 import java.util.*;
 @Service 
 public class ReturningOfficerServices {
     private final ReturningOfficerRepository returningOfficerRepository;
     private final PositionRepository positionRepository; 
-    public ReturningOfficerServices(ReturningOfficerRepository returningOfficerRepository,PositionRepository positionRepository) {
+    private final PollingStationRepository pollingStationRepository;
+    public ReturningOfficerServices(ReturningOfficerRepository returningOfficerRepository,PositionRepository positionRepository,PollingStationRepository pollingStationRepository) {
         this.returningOfficerRepository = returningOfficerRepository;
         this.positionRepository = positionRepository;
+        this.pollingStationRepository = pollingStationRepository;
     }
     public String saveReturningOfficer(ReturningOfficer r){
         returningOfficerRepository.save(r);
@@ -41,6 +45,21 @@ public class ReturningOfficerServices {
         officer.getPositions().add(position);
         returningOfficerRepository.save(officer);
         return "Position added to the returning officer";
+    }
+    public String changePollingStation(UUID officerId,int stationNumber){
+        Optional<ReturningOfficer>existingOfficer = returningOfficerRepository.findById(officerId);
+        if (existingOfficer.isEmpty()) {
+            return "The returning officer with that id does not exist";
+        }Optional<PollingStation> existingStation = pollingStationRepository.findByStationNumber(stationNumber);
+        if (existingStation.isEmpty()) {
+            return "The polling station with that stationNumber does not exist ";
+        }ReturningOfficer officer = existingOfficer.get();
+        PollingStation newStation = existingStation.get();
+        if (returningOfficerRepository.existsByPollingStationId(newStation.getId()) && (officer.getPollingStation() == null || !officer.getPollingStation().getId().equals(newStation.getId()))) {
+           return "That polling station is taken by another returnig officer"; 
+        }officer.setPollingStation(newStation);
+        returningOfficerRepository.save(officer);
+        return "Polling station changed successfully";
     }
     public List<ReturningOfficer>all(){
         return returningOfficerRepository.findAll();

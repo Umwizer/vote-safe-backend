@@ -11,4 +11,5 @@ public interface  ReturningOfficerRepository extends JpaRepository<ReturningOffi
     
     @Query("SELECT DISCTINCT ro FROM ReturningOfficer ro JOIN ro.positions p WHERE LOWER(p.name) = LOWER(:name)")
     List<ReturningOfficer>findOfficersByPositionName(@Param ("name") String name);
+    boolean existsByPollingStationId(UUID pollingStationId);
 }

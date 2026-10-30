@@ -14,7 +14,7 @@ public class CandidateServices {
 
     public String saveCandidate(Candidate candidate){
         candidateRepository.save(candidate);
-        return "Candidated saved successfully";
+        return "Candidate saved successfully";
     }
     public List<Candidate>all(){
         return candidateRepository.findAll();

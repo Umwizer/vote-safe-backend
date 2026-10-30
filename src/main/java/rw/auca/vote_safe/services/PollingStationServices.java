@@ -13,7 +13,7 @@ public class PollingStationServices {
     }
     public String savePollingStation(PollingStation pollingStation){
         pollingStationRepository.save(pollingStation);
-        return "Polling stations saved successfully";
+        return "Polling station saved successfully";
     }
     public List<PollingStation> all(){
         return pollingStationRepository.findAll();
@@ -25,15 +25,15 @@ public class PollingStationServices {
         if(pollingStationRepository.existsById(id)){
             pollingStation.setId(id);
             pollingStationRepository.save(pollingStation);
-            return "Pooling station updated successfully";
+            return "Polling station updated successfully";
         }
-        return "The pooling station with that id does not exist";
+        return "The polling station with that id does not exist";
     }
     public String delete(UUID id){
         if(pollingStationRepository.existsById(id)){
             pollingStationRepository.deleteById(id);
-            return "Pooling station deleted successfully";
+            return "Polling station deleted successfully";
         }
-        return "The pooling station with that id does not exist";
+        return "The polling station with that id does not exist";
     }
 }

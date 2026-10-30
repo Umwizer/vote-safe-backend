@@ -11,9 +11,9 @@ public class ReturningOfficerServices {
     public ReturningOfficerServices(ReturningOfficerRepository returningOfficerRepository) {
         this.returningOfficerRepository = returningOfficerRepository;
     }
-    public String addReturningOffaicer(ReturningOfficer returningOfficer){
+    public String saveReturningOffaicer(ReturningOfficer returningOfficer){
         returningOfficerRepository.save(returningOfficer);
-        return "Returning Officer added successfully";
+        return "Returning officer added successfully";
     }
     public List<ReturningOfficer>all(){
         return returningOfficerRepository.findAll();
@@ -28,5 +28,11 @@ public class ReturningOfficerServices {
             return "Returning officer updated successfully";
         }
         return  "The returning officer with that id does not exist";
+    }
+    public String delete(UUID id){
+        if (returningOfficerRepository.existsById(id)) {
+            returningOfficerRepository.deleteById(id);
+            return "Returning officer deleted successfully";
+        }return "Returning officer with that id does not exists";
     }
 }

@@ -27,7 +27,7 @@ public class NominationServices {
             nominationRepository.save(nomination);
             return "Nomination updated successfully";
         }
-        return "The nominations with that id does not exist";
+        return "The nomination with that id does not exist";
     }
     public String delete(UUID id){
         if (nominationRepository.existsById(id)) {

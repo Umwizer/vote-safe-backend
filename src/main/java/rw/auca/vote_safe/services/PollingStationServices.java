@@ -21,6 +21,9 @@ public class PollingStationServices {
     public Optional<PollingStation>byId(UUID id){
      return pollingStationRepository.findById(id);
     }
+    public List<PollingStation>findFreeStations(){
+        return pollingStationRepository.findFreePollingStations();
+    }
     public String updatePollingStation(UUID id ,PollingStation pollingStation){
         if(pollingStationRepository.existsById(id)){
             pollingStation.setId(id);

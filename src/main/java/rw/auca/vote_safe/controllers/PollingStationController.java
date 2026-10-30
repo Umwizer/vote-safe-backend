@@ -35,7 +35,12 @@ public class PollingStationController{
         if (p.isPresent()) {
             return new ResponseEntity<>(p.get(),HttpStatus.OK);
         }return new ResponseEntity<>("The polling  with that id does exist",HttpStatus.NOT_FOUND);
-    }@PutMapping("/update/{id}")
+    }
+    @GetMapping("/free")
+    public ResponseEntity<List<PollingStation>>freeStations(){
+        return ResponseEntity.ok(pollingStationServices.findFreeStations());
+    }
+    @PutMapping("/update/{id}")
     public ResponseEntity<String>update(@PathVariable  UUID id,@RequestBody PollingStation p ){
         String msg=pollingStationServices.updatePollingStation(id, p);
         if (msg.contains("does not exist")) {

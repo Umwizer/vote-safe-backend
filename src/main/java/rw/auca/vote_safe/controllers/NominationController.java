@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -74,5 +75,11 @@ public class NominationController{
     if (msg.contains("does not exist")) {
         return new ResponseEntity<>(msg,HttpStatus.NOT_FOUND);
     }return ResponseEntity.ok(msg);
+  }
+  @PatchMapping("/cancel-day")
+  public ResponseEntity<String>cancelDay(@RequestParam UUID returningOfficerId,@RequestParam  String date){
+    LocalDate localDate = LocalDate.parse(date);
+    String msg = nominationServices.cancelDay(returningOfficerId, localDate);
+    return ResponseEntity.ok(msg);
   }
 }

@@ -1,6 +1,8 @@
 package rw.auca.vote_safe.services;
 
 import org.springframework.stereotype.Service;
+
+import jakarta.transaction.Transactional;
 import rw.auca.vote_safe.models.Nomination;
 import rw.auca.vote_safe.models.NominationStatus;
 import rw.auca.vote_safe.repository.NominationRepository;
@@ -74,5 +76,10 @@ public class NominationServices {
            return  "Nomination deleted successfully";
         }
         return "The nomination with that id does not exist";
+    }
+    @Transactional 
+    public String cancelDay(UUID officerId,LocalDate date){
+        int count = nominationRepository.cancelNominationForDay(officerId, date);
+        return count + " nomination cancelled ";
     }
 }

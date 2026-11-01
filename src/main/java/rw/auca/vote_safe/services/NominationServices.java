@@ -8,15 +8,18 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 import rw.auca.vote_safe.models.Nomination;
 import rw.auca.vote_safe.models.NominationStatus;
+import rw.auca.vote_safe.repository.CampaignActivityRepository;
 import rw.auca.vote_safe.repository.NominationRepository;
 import java.util.*;
 import java.time.LocalDate;
 @Service 
 public class NominationServices {
+    private final CampaignActivityRepository campaignActivityRepository;
     private final NominationRepository nominationRepository;
 
-    public NominationServices(NominationRepository nominationRepository) {
+    public NominationServices(NominationRepository nominationRepository, CampaignActivityRepository campaignActivityRepository) {
         this.nominationRepository = nominationRepository;
+        this.campaignActivityRepository = campaignActivityRepository;
     }
     public String saveNomination(Nomination nomination){
         if (nomination.getNominationDate().isBefore(LocalDate.now())) {
@@ -75,6 +78,9 @@ public class NominationServices {
     }
     public String delete(UUID id){
         if (nominationRepository.existsById(id)) {
+            if (campaignActivityRepository.existsByNominationId(id)) {
+                return "That nomination has campaign activities ,delete them first";
+            }
            nominationRepository.deleteById(id);
            return  "Nomination deleted successfully";
         }

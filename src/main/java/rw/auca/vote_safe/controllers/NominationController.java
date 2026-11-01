@@ -1,6 +1,9 @@
 package rw.auca.vote_safe.controllers;
 
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -62,6 +65,17 @@ public class NominationController{
   public ResponseEntity<List<Object[]>>getStats(){
     return ResponseEntity.ok(nominationServices.getStatsByStatus());
   }
+  @GetMapping(value="/page",params = "page")
+  public ResponseEntity<Page<Nomination>>getPage(@RequestParam int page,@RequestParam int size,@RequestParam String sort){
+    String[] sortParts = sort.split(",");
+    String field = sortParts[0];
+    Sort.Direction direction = Sort.Direction.ASC;
+    if (sortParts.length > 1) {
+      direction = Sort.Direction.fromString(sortParts[1]);
+    }
+    Pageable pageable = PageRequest.of(page,size, Sort.by(direction,field));
+    return ResponseEntity.ok(nominationServices.getPaginated(pageable));
+  }
   @PutMapping("/update/{id}")
   public ResponseEntity<String>update(@PathVariable  UUID id, @RequestBody  Nomination n){
     String msg=nominationServices.updateNomination(id, n);
@@ -72,6 +86,9 @@ public class NominationController{
   @DeleteMapping("/delete/{id}")
   public ResponseEntity<String>delete(@PathVariable UUID id){
     String msg = nominationServices.delete(id);
+    if (msg.equals("That nomination has campaign activities,delete them first")) {
+      return new ResponseEntity<>(msg,HttpStatus.CONFLICT);
+    }
     if (msg.contains("does not exist")) {
         return new ResponseEntity<>(msg,HttpStatus.NOT_FOUND);
     }return ResponseEntity.ok(msg);

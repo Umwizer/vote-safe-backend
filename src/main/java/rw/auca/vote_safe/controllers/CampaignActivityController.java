@@ -9,19 +9,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rw.auca.vote_safe.models.CampaignActivity;
-import rw.auca.vote_safe.models.Nomination;
 import rw.auca.vote_safe.services.CampaignActivityServices;
-import rw.auca.vote_safe.services.NominationServices;
 import java.util.*;
 @RestController 
 @RequestMapping("api/campaign-activity")
 public class CampaignActivityController {
     private final CampaignActivityServices campaignActivityServices;
-    private final NominationServices nominationServices;
-    public CampaignActivityController(CampaignActivityServices campaignActivityServices,
-            NominationServices nominationServices) {
+    public CampaignActivityController(CampaignActivityServices campaignActivityServices) {
         this.campaignActivityServices = campaignActivityServices;
-        this.nominationServices = nominationServices;
     }
     @PostMapping("/save")
         public ResponseEntity<String>save(@RequestParam  UUID nominationId,@RequestBody CampaignActivity c){

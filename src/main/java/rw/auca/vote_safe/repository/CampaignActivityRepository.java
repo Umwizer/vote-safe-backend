@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import rw.auca.vote_safe.models.CampaignActivity;
 import java.util.*;
 public interface CampaignActivityRepository extends JpaRepository<CampaignActivity,UUID> {
-    @Query("SELECT a FROM Campaign WHERE a.nomination.candidate.studentNumber = :studentNumber ORDER BY a.heldDate DESC ")
+    @Query("SELECT a FROM CampaignActivity a WHERE a.nomination.candidate.studentNumber = :studentNumber ORDER BY a.heldDate DESC ")
     List<CampaignActivity>findHistoryByStudentNumber(@Param ("studentNumber") String studentNumber );
     boolean existsByNominationId(UUID nominationId);
 }

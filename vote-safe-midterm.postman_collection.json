@@ -1,0 +1,813 @@
+{
+  "info": {
+    "_postman_id": "1af994fe-7f35-436c-9c2a-db87cd434a0b",
+    "name": "vote safe",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "33449123"
+  },
+  "item": [
+    {
+      "name": "positions",
+      "item": [
+        {
+          "name": "A2",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"name\": \"Guild President\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/positions/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "positions",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/positions/all",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "positions",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C3",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/positions/unused",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "positions",
+                "unused"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"Updated Guild President\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/positions/update/36387675-cc0c-41d0-98a9-d101b6d75e06",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "positions",
+                "update",
+                "36387675-cc0c-41d0-98a9-d101b6d75e06"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "polling stations",
+      "item": [
+        {
+          "name": "A2",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"stationNumber\": 4, \"name\": \"Library\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/polling-stations/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "polling-stations",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/polling-stations/all",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "polling-stations",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/polling-stations/free",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "polling-stations",
+                "free"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D4",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/polling-stations/delete/eaf84b5c-4349-4016-acde-0c706870b2ed",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "polling-stations",
+                "delete",
+                "eaf84b5c-4349-4016-acde-0c706870b2ed"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "returning-officers",
+      "item": [
+        {
+          "name": "A2",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"firstName\": \"Charlie\",\r\n  \"lastName\": \"Niyonzima\",\r\n  \"email\": \"charlie@auca.ac.rw\",\r\n  \"pollingStation\": { \"id\": \"825ac736-fda2-459f-a186-22a2cd702daa\"},\r\n  \"positions\": [ \r\n    { \"id\": \"b3f74537-cc4e-4dea-aa89-152bd9daa2a2sa\" } \r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/returning-officers/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "returning-officers",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/returning-officers/all",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "returning-officers",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D3",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/returning-officers/26c1f1e2-26da-41a1-853b-3f885cb373f1/positions/f2e1b04c-00d1-4808-925c-afa543e72f49",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "returning-officers",
+                "26c1f1e2-26da-41a1-853b-3f885cb373f1",
+                "positions",
+                "f2e1b04c-00d1-4808-925c-afa543e72f49"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"firstName\": \"Charlie\",\r\n  \"lastName\": \"Updated Niyonzima\",\r\n  \"email\": \"charlie.new@auca.ac.rw\",\r\n  \"pollingStation\": { \"id\": \"825ac736-fda2-459f-a186-22a2cd702daa\" },\r\n  \"positions\": [ { \"id\": \"b3f74537-cc4e-4dea-aa89-152bd9daa2a2\" } ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/returning-officers/update/f5afc30d-0454-407d-b9d9-acadbdb9a092",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "returning-officers",
+                "update",
+                "f5afc30d-0454-407d-b9d9-acadbdb9a092"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Candidates",
+      "item": [
+        {
+          "name": "A2",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/candidates/all",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "candidates",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C4",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/candidates/of-returning-officer/26c1f1e2-26da-41a1-853b-3f885cb373f1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "candidates",
+                "of-returning-officer",
+                "26c1f1e2-26da-41a1-853b-3f885cb373f1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Nominations",
+      "item": [
+        {
+          "name": "A2",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/nominations/all",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "nominations",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B3",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/nominations/between?start=2026-10-01&end=2026-10-31",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "nominations",
+                "between"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "2026-10-01"
+                },
+                {
+                  "key": "end",
+                  "value": "2026-10-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D1",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nominationDate\": \"2026-12-25\",\r\n  \"status\": \"APPROVED\", \r\n  \"manifesto\": \"Safe saving test\",\r\n  \"supporterSignatures\": 100,\r\n  \"candidate\": { \"id\": \"4cd3690a-56a3-41f3-b79e-7def4e42d80d\" },\r\n  \"returningOfficer\": { \"id\": \"26c1f1e2-26da-41a1-853b-3f885cb373f1\" }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/nominations/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "nominations",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "D2",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/nominations/48a86f4c-4a92-443c-b4ed-98ad87af0089/status?status=VETTED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "nominations",
+                "48a86f4c-4a92-443c-b4ed-98ad87af0089",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "VETTED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/nominations/by-status?status=SUBMITTED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "nominations",
+                "by-status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "SUBMITTED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/nominations/by-status?status=APPROVED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "nominations",
+                "by-status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "APPROVED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E3",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/nominations/delete/329dd699-4585-4a51-9e0e-5bd9b6bc8677",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "nominations",
+                "delete",
+                "329dd699-4585-4a51-9e0e-5bd9b6bc8677"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New request",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "F1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/nominations/stats/by-status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "nominations",
+                "stats",
+                "by-status"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "campaigns",
+      "item": [
+        {
+          "name": "E1",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"activityType\": \"Debate\",\r\n  \"venue\": \"Main Hall\",\r\n  \"attende",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/campaign-activities/save?nominationId=329dd699-4585-4a51-9e0e-5bd9b6bc8677",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "campaign-activities",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "nominationId",
+                  "value": "329dd699-4585-4a51-9e0e-5bd9b6bc8677",
+                  "type": "text",
+                  "id": 0
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/campaign-activities/candidate/22-3312",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "campaign-activities",
+                "candidate",
+                "22-3312"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Bonus",
+      "item": [
+        {
+          "name": "Bonus 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/dashboard/summary",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "dashboard",
+                "summary"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Bonus 2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/nominations/page?page=0&size=5&sort=nominationDate,desc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "nominations",
+                "page"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sort",
+                  "value": "nominationDate,desc"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

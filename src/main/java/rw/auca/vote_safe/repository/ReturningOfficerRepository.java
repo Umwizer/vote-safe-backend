@@ -6,10 +6,10 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.UUID;
-import rw.auca.vote_safe.models.ReturningOfficer;;
+import rw.auca.vote_safe.models.ReturningOfficer;
 public interface  ReturningOfficerRepository extends JpaRepository<ReturningOfficer,UUID> {
     
-    @Query("SELECT DISTINCT ro FROM ReturningOfficer ro JOIN ro.positions p WHERE LOWER(p.name) = LOWER(:name)")
+    @Query("SELECT DISTINCT ro FROM ReturningOfficer ro JOIN ro.positions p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%',:name,'%'))")
     List<ReturningOfficer>findOfficersByPositionName(@Param ("name") String name);
     boolean existsByPollingStationId(UUID pollingStationId);
 }

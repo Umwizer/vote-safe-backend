@@ -9,7 +9,7 @@ import java.util.UUID;
 import rw.auca.vote_safe.models.PollingStation;
 public interface PollingStationRepository extends JpaRepository<PollingStation, UUID> {
     
-    @Query("SELECT ps FROM PollingStation ps WHERE NOT EXISTS (SELECT ro FROM ReturningOfficer ro WHERE ro.pollingStation = ps) ORDR BY ps.stationNumber")
+    @Query("SELECT ps FROM PollingStation ps WHERE NOT EXISTS (SELECT ro FROM ReturningOfficer ro WHERE ro.pollingStation = ps) ORDER BY ps.stationNumber")
     List<PollingStation>findFreePollingStations();
     Optional<PollingStation>findByStationNumber(int stationNumber);
 }

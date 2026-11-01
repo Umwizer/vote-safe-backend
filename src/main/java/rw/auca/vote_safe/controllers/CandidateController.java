@@ -20,7 +20,7 @@ import rw.auca.vote_safe.services.ReturningOfficerServices;
 public class CandidateController {
     private final CandidateServices candidateServices;
     private final  ReturningOfficerServices returningOfficerServices;
-    private CandidateController(CandidateServices candidateServices,ReturningOfficerServices returningOfficerServices){
+    public  CandidateController(CandidateServices candidateServices,ReturningOfficerServices returningOfficerServices){
         this.candidateServices = candidateServices;
         this.returningOfficerServices=returningOfficerServices;
     }

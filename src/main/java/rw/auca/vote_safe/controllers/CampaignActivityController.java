@@ -2,6 +2,8 @@ package rw.auca.vote_safe.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,10 @@ public class CampaignActivityController {
             return new ResponseEntity<>(msg,HttpStatus.BAD_REQUEST);
         }return new ResponseEntity<>(msg,HttpStatus.CREATED);
     }
-
+    @GetMapping("/candidate/{studentNumber}")
+       public ResponseEntity<List<CampaignActivity>> getHistory(@PathVariable String studentNumber){
+        List<CampaignActivity> history = campaignActivityServices.getHistory(studentNumber);
+        return ResponseEntity.ok(history);
+       }
     
 }

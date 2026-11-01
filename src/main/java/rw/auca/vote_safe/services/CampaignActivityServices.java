@@ -30,4 +30,7 @@ public class CampaignActivityServices {
         campaignActivityRepository.save(activity);
         return "Campaign activity saved successfully";
     }
+    public List<CampaignActivity> getHistory(String studentNumber){
+        return campaignActivityRepository.findHistoryByStudentNumber(studentNumber);
+    }
 }

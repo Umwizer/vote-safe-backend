@@ -1,5 +1,7 @@
 package rw.auca.vote_safe.services;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
@@ -81,5 +83,8 @@ public class NominationServices {
     public String cancelDay(UUID officerId,LocalDate date){
         int count = nominationRepository.cancelNominationForDay(officerId, date);
         return count + " nomination cancelled ";
+    }
+    public Page<Nomination> getPaginated(Pageable pageable){
+        return nominationRepository.findAll(pageable);
     }
 }

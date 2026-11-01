@@ -22,4 +22,6 @@ public interface NominationRepository extends JpaRepository<Nomination, UUID>{
     @Transactional 
     @Query("UPDATE Nomination n SET n.status = NominationStatus.DISQUALIFIED WHERE n.returningOfficer.id = :OfficerId AND n.nominationDate = :date AND n.status <> NominationStatus.APPROVED")
      int cancelNominationForDay(@Param("officerId") UUID officerId,@Param("date") LocalDate date);
+    long countByNominationDate(LocalDate date);
+    long countByStatus(NominationStatus status);
 }

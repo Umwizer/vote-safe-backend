@@ -9,7 +9,7 @@ import java.util.UUID;
 import rw.auca.vote_safe.models.ReturningOfficer;;
 public interface  ReturningOfficerRepository extends JpaRepository<ReturningOfficer,UUID> {
     
-    @Query("SELECT DISCTINCT ro FROM ReturningOfficer ro JOIN ro.positions p WHERE LOWER(p.name) = LOWER(:name)")
+    @Query("SELECT DISTINCT ro FROM ReturningOfficer ro JOIN ro.positions p WHERE LOWER(p.name) = LOWER(:name)")
     List<ReturningOfficer>findOfficersByPositionName(@Param ("name") String name);
     boolean existsByPollingStationId(UUID pollingStationId);
 }

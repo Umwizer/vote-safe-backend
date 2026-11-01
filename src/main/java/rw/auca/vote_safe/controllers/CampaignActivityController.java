@@ -2,6 +2,7 @@ package rw.auca.vote_safe.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,5 +35,14 @@ public class CampaignActivityController {
         List<CampaignActivity> history = campaignActivityServices.getHistory(studentNumber);
         return ResponseEntity.ok(history);
        }
-    
+    @DeleteMapping("/delete{id}")
+       public ResponseEntity<String>delete(@PathVariable UUID id ){
+        String msg = campaignActivityServices.delete(id);
+        if (msg.equals("That nomination has campaign activities ,delete them first")) {
+            return new ResponseEntity<>(msg,HttpStatus.CONFLICT);
+        }
+        if (msg.contains("does not exist")) {
+            return new ResponseEntity<>(msg,HttpStatus.NOT_FOUND);
+        }return ResponseEntity.ok(msg);
+       }
 }

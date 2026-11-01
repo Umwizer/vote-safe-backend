@@ -1,8 +1,12 @@
 package rw.auca.vote_safe.services;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.transaction.Transactional;
 import rw.auca.vote_safe.models.Nomination;
@@ -53,7 +57,7 @@ public class NominationServices {
         }else if (current == NominationStatus.VETTED && (newStatus == NominationStatus.APPROVED || newStatus == NominationStatus.DISQUALIFIED)) {
             allowed=true;
         }if (!allowed) {
-            return "Cannot change status from"+current+"to"+newStatus;
+            return "Cannot change status from" + current + "to" + newStatus;
         }n.setStatus(newStatus);
         nominationRepository.save(n);
         return  "Nomination status updated successfully";

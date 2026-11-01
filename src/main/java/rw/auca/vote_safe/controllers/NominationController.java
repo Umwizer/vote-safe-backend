@@ -82,4 +82,13 @@ public class NominationController{
     String msg = nominationServices.cancelDay(returningOfficerId, localDate);
     return ResponseEntity.ok(msg);
   }
+  @PatchMapping("/{id}/status")
+  public ResponseEntity<String>changeStatu(@PathVariable UUID id, @RequestParam NominationStatus status ){
+    String msg = nominationServices.changeStatus(id, status);
+    if (msg.equals("The nomiantion with that id does not exist")) {
+      return new ResponseEntity<>(msg, HttpStatus.NOT_FOUND);
+    }if (msg.startsWith("Cannot change status from")) {
+      return new ResponseEntity<>(msg,HttpStatus.BAD_REQUEST);
+    }return ResponseEntity.ok(msg);
+  }
 }

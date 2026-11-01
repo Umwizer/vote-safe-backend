@@ -52,7 +52,7 @@ public class ReturningOfficerServices {
             return "The returning officer with that id does not exist";
         }Optional<PollingStation> existingStation = pollingStationRepository.findByStationNumber(stationNumber);
         if (existingStation.isEmpty()) {
-            return "The polling station with that stationNumber does not exist ";
+            return "The polling station with that stationNumber does not exist";
         }ReturningOfficer officer = existingOfficer.get();
         PollingStation newStation = existingStation.get();
         if (returningOfficerRepository.existsByPollingStationId(newStation.getId()) && (officer.getPollingStation() == null || !officer.getPollingStation().getId().equals(newStation.getId()))) {

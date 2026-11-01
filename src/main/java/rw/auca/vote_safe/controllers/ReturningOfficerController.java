@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -53,13 +54,22 @@ public class ReturningOfficerController {
     @PutMapping("/{returningOfficerId}/positions/{positionId}")
     public ResponseEntity<String>addPosition(@PathVariable UUID returningOfficerId,@PathVariable UUID positionId){
         String msg = returningOfficerServices.addPosition(returningOfficerId, positionId);
-        if (msg.equals("The returning officer with that id does not exist") || msg.equals("That position does not exist ")) {
+        if (msg.equals("The returning officer with that id does not exist") || msg.equals("That position does not exist")) {
             return new ResponseEntity<>(msg,HttpStatus.NOT_FOUND);
         }
         if (msg.equals("The returning officer already has that position")) {
             return new ResponseEntity<>(msg,HttpStatus.CONFLICT);
         }
         return ResponseEntity.ok(msg);
+    }
+    @PatchMapping("/{returningOfficerId}/polling-station")
+    public ResponseEntity<String>changeStation(@PathVariable UUID returningOfficerId,@RequestParam int stationNumber){
+        String msg = returningOfficerServices.changePollingStation(returningOfficerId, stationNumber);
+        if (msg.equals("The returning officer with that id does not exist")|| msg.equals("The pollign station with that stationNumber does not exist")) {
+            return new ResponseEntity<>(msg,HttpStatus.NOT_FOUND);
+        }if (msg.equals("That polling stations is taken by another returning officer")) {
+            return new ResponseEntity<>(msg,HttpStatus.CONFLICT);
+        }return ResponseEntity.ok(msg);
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String>delete(@PathVariable UUID id){

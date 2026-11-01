@@ -15,7 +15,7 @@ import rw.auca.vote_safe.models.CampaignActivity;
 import rw.auca.vote_safe.services.CampaignActivityServices;
 import java.util.*;
 @RestController 
-@RequestMapping("api/campaign-activity")
+@RequestMapping("api/campaign-activities")
 public class CampaignActivityController {
     private final CampaignActivityServices campaignActivityServices;
     public CampaignActivityController(CampaignActivityServices campaignActivityServices) {

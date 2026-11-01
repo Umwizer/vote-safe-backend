@@ -29,7 +29,7 @@ public class CampaignActivityController {
         if (msg.equals("The nomination with that id does not exist")) {
             return new ResponseEntity<>(msg,HttpStatus.NOT_FOUND);
         }if (msg.equals("Campaign activities are only APPROVED  nominations")) {
-            return new ResponseEntity<>(msg,HttpStatus.BAD_REQUEST)
+            return new ResponseEntity<>(msg,HttpStatus.BAD_REQUEST);
         }return new ResponseEntity<>(msg,HttpStatus.CREATED);
     }
 

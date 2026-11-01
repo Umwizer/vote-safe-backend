@@ -54,6 +54,9 @@ public class NominationServices {
         nominationRepository.save(n);
         return  "Nomination status updated successfully";
     }
+    public List<Object[]> getStatsByStatus(){
+        return nominationRepository.getNominationStasByStatus();
+    }
     public String updateNomination(UUID id, Nomination nomination){
         Optional<Nomination>existingNomination =nominationRepository.findById(id);
         if (existingNomination.isPresent()) {

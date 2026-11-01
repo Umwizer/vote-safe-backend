@@ -57,6 +57,10 @@ public class NominationController{
     return ResponseEntity.ok(nominationServices.betweenDates(startDate, endDate));
 
   }
+  @GetMapping("/stats/by-status")
+  public ResponseEntity<List<Object[]>>getStats(){
+    return ResponseEntity.ok(nominationServices.getStatsByStatus());
+  }
   @PutMapping("/update/{id}")
   public ResponseEntity<String>update(@PathVariable  UUID id, @RequestBody  Nomination n){
     String msg=nominationServices.updateNomination(id, n);
